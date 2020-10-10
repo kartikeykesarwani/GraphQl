@@ -1,8 +1,40 @@
-import myCurrentLocation,{ getGreeting,message, name } from './myModule'
-import add, { sub } from './math'
-console.log(message);
-console.log(name);
-console.log(myCurrentLocation);
-console.log(getGreeting('Jessica'))
-console.log(add(2,3))
-console.log(sub(8,7))
+import { GraphQLServer } from 'graphql-yoga'
+
+const typeDefs = `
+type Query {
+   title: String!
+   price: Float!
+   releaseYear: Int
+   rating: Float
+   isStock: Boolean!
+}`
+
+const resolvers = {
+    Query: {
+       title() {
+           return 'The war of art'
+       },
+       price() {
+           return 12.99
+       },
+       releaseYear() {
+           return null 
+       },
+       rating() {
+           return 5
+       },
+       isStock() {
+           return true
+       }
+
+        
+    }
+}
+
+const server = new GraphQLServer({
+    typeDefs,
+    resolvers
+})
+server.start(() => {
+    console.log('The Server is up!')
+})
