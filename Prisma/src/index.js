@@ -8,6 +8,7 @@ import Post from './resolvers/Post'
 import Comment from './resolvers/Comment'
 
 const pubsub = new PubSub()
+
 const server = new GraphQLServer({
     typeDefs: './src/schema.graphql',
     resolvers: {
@@ -19,8 +20,8 @@ const server = new GraphQLServer({
         Comment
     },
     context: {
-      db,
-      pubsub
+        db,
+        pubsub
     }
 })
 
